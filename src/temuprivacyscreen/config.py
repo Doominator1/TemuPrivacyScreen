@@ -3,28 +3,28 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 
-CAMERA_INDEX = 0
-FRAME_WIDTH = 640
-FRAME_HEIGHT = 480
+CAMERA_INDEX = 0  # which camera device to open, 0 is the built-in FaceTime camera
+FRAME_WIDTH = 640  # capture width in pixels
+FRAME_HEIGHT = 480  # capture height in pixels
 
-DETECTION_CONFIDENCE = 0.6
+DETECTION_CONFIDENCE = 0.5  # minimum face-detector confidence to count as a face, 0-1
 
-YAW_ENTER_DEG = 20.0
-PITCH_ENTER_DEG = 18.0
-YAW_EXIT_DEG = 28.0
-PITCH_EXIT_DEG = 26.0
+YAW_ENTER_DEG = 20.0  # max left/right gaze angle to start counting as "looking"
+PITCH_ENTER_DEG = 18.0  # max up/down gaze angle to start counting as "looking"
+YAW_EXIT_DEG = 28.0  # left/right gaze angle that must be exceeded to stop "looking"
+PITCH_EXIT_DEG = 26.0  # up/down gaze angle that must be exceeded to stop "looking"
 
-ENTER_CONSECUTIVE_FRAMES = 1
-EXIT_CONSECUTIVE_FRAMES = 3
-NO_FACE_COUNTS_AS_EXIT = True
+ENTER_CONSECUTIVE_FRAMES = 1  # consecutive "looking" frames needed before hiding the screen
+EXIT_CONSECUTIVE_FRAMES = 2  # consecutive "not looking" frames needed before restoring it
+NO_FACE_COUNTS_AS_EXIT = False  # treat "no face visible" as "not looking" (restores the screen)
 
-DIM_BRIGHTNESS = 0.0
+DIM_BRIGHTNESS = 0.0  # brightness to drop to while hidden, 0-1
 
-CONSOLE_LEVEL = "INFO"
+CONSOLE_LEVEL = "INFO"  # default terminal log verbosity (DEBUG, INFO, WARNING, ...)
 
-TARGET_FPS = 60.0
+TARGET_FPS = 60.0  # capture/inference loop rate, higher is snappier but uses more CPU
 
-PREVIEW = False
+PREVIEW = False  # whether to open the debug camera preview window by default
 
 
 @dataclass(frozen=True, slots=True)
